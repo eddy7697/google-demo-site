@@ -6,7 +6,7 @@
                 enter-active-class="fadeInDown"
                 leave-active-class="fadeOutUp"
                 >
-                <div class="google-logo" v-if="!isFuncShow" @click="showBtnGroup">
+                <div class="google-logo" v-if="!isFuncShow && isLoaded" @click="showBtnGroup">
                     <img alt="Google logo" src="../assets/google-cloud.png">
                 </div>
             </transition>               
@@ -36,11 +36,16 @@
             leave-active-class="fadeOutRight">
             <DetailPanel v-if="isDetailShow" :type="showedtype" @closePanel="closeDetailPanel"/>
         </transition>
-       
-       <div class="site-footer">
-           <img src="../assets/mc-new-logo2_1.jpg" alt="">
-           <p>Copyright © 2018 馬來西亞商思想科技有限公司臺灣分公司 <br>Master Concept Tech Inc, Taiwan Branch. All Rights Reserved.</p>
-       </div>
+
+        <transition
+            name="fadeIn"
+            enter-active-class="fadeIn"
+            leave-active-class="fadeOut">
+            <div class="site-footer" v-if="isLoaded">
+                <img src="../assets/mc-new-logo2_1.jpg" alt="">
+                <p>Copyright © 2018 馬來西亞商思想科技有限公司臺灣分公司 <br>Master Concept Tech Inc, Taiwan Branch. All Rights Reserved.</p>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -55,12 +60,18 @@ export default {
     },
     data() {
         return {
+            isLoaded: false,
             isActive: false,
             isFuncShow: false,
             isRollback: false,
             isDetailShow: false,
             showedtype: null
         }
+    },
+    created() {
+        setTimeout(() => {
+            this.isLoaded = true
+        }, 300);
     },
     watch: {
         showedtype(showedtype, oldVal) {
@@ -69,11 +80,9 @@ export default {
                     this.isDetailShow = false
 
                     setTimeout(() => {
-                        // this.showDetailInformation(showedtype)
                         this.isDetailShow = true
                     }, 200);
                 } else {
-                    // this.showDetailInformation(showedtype)
                     this.isDetailShow = true
                 }
             } else {
@@ -95,9 +104,6 @@ export default {
         closeDetailPanel() {
             this.showedtype = null
         }
-        // showDetailInformation(type) {
-        //     console.log(info.serviceInfo())
-        // }
     }
 }
 </script>
@@ -429,4 +435,13 @@ export default {
         left: 50%;
     }
 }
+@media only screen and (max-width: 768px) {
+    .home {
+
+        &.show-panel {
+            width: 100%;
+        }
+    }
+}
+
 </style>

@@ -1,9 +1,11 @@
 <template>
     <div class="detail-panel">
         <el-button class="close-btn" icon="el-icon-close" circle @click="closeDetail"></el-button>
-        <h1 class="info-title">{{infoTitle}}</h1>
-        <div class="info-content" v-html="infoContent"></div>
-        <router-link class="info-demo-btn" to="vision-api">Start Demo</router-link>
+        <div class="inner-box">
+            <h1 class="info-title">{{infoTitle}}</h1>
+            <div class="info-content" v-html="infoContent"></div>
+            <router-link class="info-demo-btn" to="vision-api">Start Demo</router-link>
+        </div>
     </div>
 </template>
 
@@ -60,29 +62,44 @@ export default {
         top: 10px;
         left: 10px;
     }
-    .info-title {
-        margin-top: 0;        
-    }
-    .info-content {
-        margin-bottom: 50px;
-        // p {
-        //     text-indent : 32px;
-        // }
-    }
-    .info-demo-btn {
-        background-color: #4185f5;
-        padding: 15px 30px;
-        color: white;
-        text-decoration: none;
-        transition: all .2s ease;
-        box-shadow: 2px 2px 12px -2px rgba(0, 0, 0, 0.3);
+    .inner-box {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        right: 50px;
+        bottom: 50px;
+        overflow: auto;
+        text-align: center;
 
-        &:hover {
-            box-shadow: 2px 2px 12px 0px rgba(0, 0, 0, 0.3);
+        .info-title {
+            margin-top: 0; 
+            text-align: left;      
         }
-        &:active {
+        .info-content {
+            margin-bottom: 50px;
+            line-height: 26px;
+            text-align: left;   
+        }
+        .info-demo-btn {
+            background-color: #4185f5;
+            padding: 15px 30px;
+            color: white;
+            text-decoration: none;
+            transition: all .2s ease;
             box-shadow: 2px 2px 12px -2px rgba(0, 0, 0, 0.3);
+
+            &:hover {
+                box-shadow: 2px 2px 12px 0px rgba(0, 0, 0, 0.3);
+            }
+            &:active {
+                box-shadow: 2px 2px 12px -2px rgba(0, 0, 0, 0.3);
+            }
         }
+    }    
+}
+@media only screen and (max-width: 768px) {
+    .detail-panel {
+        width: 100%;
     }
 }
 </style>

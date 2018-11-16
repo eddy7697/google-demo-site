@@ -40,15 +40,15 @@
             <el-dialog
                 title="辨識結果"
                 :visible.sync="resultDialogVisible"
-                width="600px"
+                :width="dialogResponsive"
                 center>
                 <el-row>
-                    <el-col :span="12">
+                    <el-col :span="responsive">
                         <div class="result-section">
                             <img :src="imageName" width="80%" alt="">
                         </div>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :span="responsive">
                         <el-table
                             :data="payload"
                             style="width: 100%">
@@ -89,10 +89,24 @@ export default {
             isLoading: false,
             statusInfo: null,
             imageName: null,
+            windowWidth: window.innerWidth,
             resultDialogVisible: false
         }
     },
     created() {
+        let self = this
+
+        window.addEventListener("resize", () => {
+            self.windowWidth = window.innerWidth
+        })
+    },
+    computed: {
+        dialogResponsive() {
+            return this.windowWidth > 620 ? '600px' : '90%'
+        },
+        responsive() {
+            return this.windowWidth > 500 ? 12 : 24
+        }
     },
     methods: {
         backToHome() {
@@ -222,6 +236,9 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
         transform: translate(-50%, -50%);
     }
 }

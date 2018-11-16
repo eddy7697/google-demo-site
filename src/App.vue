@@ -2,16 +2,19 @@
     <div id="app">
         <div id="nav">
         </div>
-        <router-view/>
+        <transition
+            name="fadeIn"
+            enter-active-class="fadeInRight"
+            leave-active-class="fadeOutLeft">
+            <router-view/>
+        </transition> 
     </div>
 </template>
 
-<style>
-/* * {
-    border: red thin solid;
-} */
+<style lang="scss">
 #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    font-family: Microsoft JhengHei;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -21,5 +24,9 @@
     left: 0;
     right: 0;
     bottom: 0;
+
+    button {
+        font-family: Microsoft JhengHei;
+    }
 }
 </style>
