@@ -65,9 +65,9 @@ export default {
     }
     .info-content {
         margin-bottom: 50px;
-        p {
-            // text-indent : 32px;
-        }
+        // p {
+        //     text-indent : 32px;
+        // }
     }
     .info-demo-btn {
         background-color: #4185f5;

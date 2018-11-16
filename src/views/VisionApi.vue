@@ -147,9 +147,9 @@ export default {
     .service-icon {
         width: 70px;
     }
-    .service-title {
+    // .service-title {
 
-    }
+    // }
     .service-short-desc {
         font-size: 20px;
     }
