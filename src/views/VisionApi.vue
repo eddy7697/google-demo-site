@@ -4,7 +4,7 @@
             <div class="content-section">
                 <img class="service-icon" src="../assets/Cloud AutoML.png">
                 <h3 class="service-title">Cloud AutoML Vision</h3>
-                <p class="service-short-desc">Proof of concept, POC Platform</p>
+                <!-- <p class="service-short-desc">Proof of concept, POC Platform</p> -->
                 <el-upload
                     class="upload-demo"
                     drag
@@ -16,10 +16,15 @@
                     :show-file-list="false"
                     :auto-upload="true">
                     <i class="el-icon-upload"></i>
-                    <div class="el-upload__text">將要辨識的圖片拖曳到此處，或<em>點我選擇圖片</em></div>
-                    <div class="el-upload__tip" slot="tip">只能上傳jpg/png文件，大小不超過2m</div>
+                    <div class="el-upload__text">將要辨識的圖片拖曳到此處，或<em>點我選擇圖片</em><br>只能上傳jpg/png/gif文件，大小不超過1.5MB</div>
                 </el-upload>
-                <el-button class="service-action-btn" style="margin-left: 10px;" size="large" type="primary" @click="submitUpload">上傳辨識</el-button>
+                <el-button class="service-action-btn" style="margin-left: 10px;" size="large" type="primary" @click="backToHome">
+                    <i class="fa fa-google" aria-hidden="true"></i>&nbsp;&nbsp;回到首頁
+                </el-button>
+                <div class="site-footer">
+                    <img src="../assets/mc-new-logo2_1.jpg" alt="">
+                    <p>Copyright © 2018 馬來西亞商思想科技有限公司臺灣分公司 <br>Master Concept Tech Inc, Taiwan Branch. All Rights Reserved.</p>
+                </div>
             </div>
             <transition
                 name="fade"
@@ -32,9 +37,6 @@
                     </div>                    
                 </div>
             </transition>
-            <div class="site-footer">
-                <img src="../assets/mc-new-logo2_1.jpg" alt="">
-            </div>
             <el-dialog
                 title="辨識結果"
                 :visible.sync="resultDialogVisible"
@@ -93,8 +95,8 @@ export default {
     created() {
     },
     methods: {
-        submitUpload() {
-            this.$refs.upload.submit();
+        backToHome() {
+            this.$router.push('/')
         },
         handleSuccess(response) {
             let self = this
@@ -155,6 +157,18 @@ export default {
         margin-top: 30px;
     }
 }
+.el-upload-dragger {
+    height: 195px;
+
+    .el-upload__text {
+        color: #dddddd !important;
+    }
+}
+.el-button--primary {
+    color: #fff;
+    background-color: #4284F3 !important;
+    border-color: #4284F3 !important;
+}
 .loading-bar {
     position: fixed;
     top: 0;
@@ -181,15 +195,20 @@ export default {
     }
 }
 .site-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
     text-align: center;
-    height: 70px;        
+    margin-top: 80px;
+    // height: 90px;        
 
     img {
         height: 60px;
+    }
+    p {
+        font-size: 8px;
+        margin: 0;
     }
 }
 .result-section {

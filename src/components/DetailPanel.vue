@@ -1,5 +1,6 @@
 <template>
     <div class="detail-panel">
+        <el-button class="close-btn" icon="el-icon-close" circle @click="closeDetail"></el-button>
         <h1 class="info-title">{{infoTitle}}</h1>
         <div class="info-content" v-html="infoContent"></div>
         <router-link class="info-demo-btn" to="vision-api">Start Demo</router-link>
@@ -30,6 +31,11 @@ export default {
 
         this.infoTitle = obj ? obj.title : null
         this.infoContent = obj ? obj.content : null
+    },
+    methods: {
+        closeDetail() {
+            this.$emit('closePanel')
+        }
     }
 }
 </script>
@@ -49,13 +55,18 @@ export default {
     box-sizing: border-box;
     box-shadow: -6px 0px 12px -2px rgba(200, 200, 200, 0.6);
 
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
     .info-title {
         margin-top: 0;        
     }
     .info-content {
         margin-bottom: 50px;
         p {
-            text-indent : 32px;
+            // text-indent : 32px;
         }
     }
     .info-demo-btn {

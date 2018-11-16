@@ -34,11 +34,12 @@
             name="fadeIn"
             enter-active-class="fadeInRight"
             leave-active-class="fadeOutRight">
-            <DetailPanel v-if="isDetailShow" :type="showedtype"/>
+            <DetailPanel v-if="isDetailShow" :type="showedtype" @closePanel="closeDetailPanel"/>
         </transition>
        
        <div class="site-footer">
            <img src="../assets/mc-new-logo2_1.jpg" alt="">
+           <p>Copyright © 2018 馬來西亞商思想科技有限公司臺灣分公司 <br>Master Concept Tech Inc, Taiwan Branch. All Rights Reserved.</p>
        </div>
     </div>
 </template>
@@ -70,11 +71,13 @@ export default {
                     setTimeout(() => {
                         // this.showDetailInformation(showedtype)
                         this.isDetailShow = true
-                    }, 500);
+                    }, 200);
                 } else {
                     // this.showDetailInformation(showedtype)
                     this.isDetailShow = true
                 }
+            } else {
+                this.isDetailShow = false
             }
         }
     },
@@ -89,6 +92,9 @@ export default {
         showAuroMlFunc() {
             this.isRollback = !this.isRollback
         },
+        closeDetailPanel() {
+            this.showedtype = null
+        }
         // showDetailInformation(type) {
         //     console.log(info.serviceInfo())
         // }
@@ -112,10 +118,15 @@ export default {
         left: 0;
         right: 0;
         text-align: center;
-        height: 70px;        
-        
+        // margin-top: 80px;
+        height: 110px;        
+
         img {
             height: 60px;
+        }
+        p {
+            font-size: 8px;
+            margin: 0;
         }
     }
 }
