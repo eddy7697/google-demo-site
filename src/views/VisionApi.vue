@@ -11,6 +11,7 @@
                     ref="upload"
                     action="http://35.194.171.98/upload/detect/image"
                     :on-success="handleSuccess"
+                    :on-error="handleError"
                     :on-change="handleChange"
                     :before-upload="handleBefore"
                     :show-file-list="false"
@@ -129,6 +130,9 @@ export default {
                     self.imageName = `http://35.194.171.98/uploads/${response.file.name}`
                     self.resultDialogVisible = true
                 })
+        },
+        handleError() {
+            alert('oops something went wrong')
         },
         handleBefore() {
             this.statusInfo = '圖片上傳中'

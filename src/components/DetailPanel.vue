@@ -4,7 +4,9 @@
         <div class="inner-box">
             <h1 class="info-title">{{infoTitle}}</h1>
             <div class="info-content" v-html="infoContent"></div>
-            <router-link class="info-demo-btn" to="vision-api">Start Demo</router-link>
+
+            <router-link v-if="routeTarget" class="info-demo-btn" :to="routeTarget">{{btnTitle}}</router-link>
+            <a v-else class="info-demo-btn">{{btnTitle}}</a>
         </div>
     </div>
 </template>
@@ -25,7 +27,9 @@ export default {
         return {
             serviceInfo: serviceInfoObj(),
             infoTitle: null,
-            infoContent: null
+            infoContent: null,
+            btnTitle: null,
+            routeTarget: null
         }
     },
     created() {
@@ -33,6 +37,8 @@ export default {
 
         this.infoTitle = obj ? obj.title : null
         this.infoContent = obj ? obj.content : null
+        this.btnTitle = obj ? obj.redirectBtn : null
+        this.routeTarget = obj ? obj.route : null
     },
     methods: {
         closeDetail() {
@@ -53,6 +59,7 @@ export default {
     top: 0;
     bottom: 0;
     width: 50%;
+    z-index: 1;
     padding: 50px;
     box-sizing: border-box;
     box-shadow: -6px 0px 12px -2px rgba(200, 200, 200, 0.6);
