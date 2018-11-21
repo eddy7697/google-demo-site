@@ -1,5 +1,5 @@
 <template>
-    <el-row style="height: 100%">
+    <el-row style="height: 100%; overflow: auto">
         <el-col :span="24">
             <div class="content-section">
                 <img class="service-icon" src="../assets/Cloud AutoML.png">
@@ -79,6 +79,7 @@
 <script>
 // import _ from 'lodash'
 import axios from 'axios'
+import base64 from 'hi-base64'
 
 export default {
     name: 'VisionApi',
@@ -115,20 +116,25 @@ export default {
         },
         handleSuccess(response) {
             let self = this
-            let nameBase64 = btoa(response.file.name)
+            let nameBase64 = base64.encode(response.file.name)
 
+            this.imageName = null
             this.statusInfo = '上傳完成，辨識中'
-
+            
             axios.get(`http://35.194.171.98/prediction/${nameBase64}`)
                 .then(res => {
                     let payload = res.data.payload
 
-                    self.isLoading = false
-                    self.statusInfo = null
-                    self.payload = payload
+                    if (payload) {
+                        self.isLoading = false
+                        self.statusInfo = null
+                        self.payload = payload
 
-                    self.imageName = `http://35.194.171.98/uploads/${response.file.name}`
-                    self.resultDialogVisible = true
+                        self.imageName = `http://35.194.171.98/uploads/${response.file.name.replace(/[/\\?%*: |"<>]/g, '_')}`
+                        self.resultDialogVisible = true
+                    } else {
+                        self.handleSuccess(response)
+                    }
                 })
         },
         handleError() {
@@ -160,6 +166,7 @@ export default {
     position: absolute;
     top: 45%;
     left: 50%;
+    padding: 20px 10px;
     transform: translate(-50%, -50%);
 
     .service-icon {
@@ -244,6 +251,14 @@ export default {
         max-width: 100%;
         width: auto;
         transform: translate(-50%, -50%);
+    }
+}
+@media only screen and (max-width: 768px) {
+    .content-section {
+        position: relative;
+        top: inherit;
+        left: inherit;
+        transform: inherit;
     }
 }
 </style>
