@@ -11,6 +11,18 @@
     </div>
 </template>
 
+<script>
+export default {
+    name: 'App',
+    created() {
+        window.fcWidget.init({
+            token: "73013dc9-d00e-481e-a3e3-9e02afe1e466",
+            host: "https://wchat.freshchat.com"
+        });
+    },
+}
+</script>
+
 <style lang="scss">
 #app {
     overflow: hidden;
