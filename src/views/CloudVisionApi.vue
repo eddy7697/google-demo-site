@@ -3,13 +3,13 @@
         <el-col :span="24">
             <div class="content-section">
                 <img class="service-icon" src="../assets/Cloud AutoML.png">
-                <h3 class="service-title">Cloud AutoML Vision</h3>
+                <h3 class="service-title">Cloud Vision API</h3>
                 <!-- <p class="service-short-desc">Proof of concept, POC Platform</p> -->
                 <el-upload
                     class="upload-demo"
                     drag
                     ref="upload"
-                    action="http://35.194.171.98/upload/detect/image"
+                    action="http://35.194.171.98/upload/vission/image"
                     :on-success="handleSuccess"
                     :on-error="handleError"
                     :on-change="handleChange"
@@ -45,8 +45,8 @@
                 center>
                 <el-row>
                     <el-col :span="responsive">
-                        <div class="result-section">
-                            <img :src="imageName" width="80%" alt="">
+                        <div class="result-section" :style="`background-image: url('${imageName}');`">
+                            <!-- <img :src="imageName" width="80%" alt=""> -->
                         </div>
                     </el-col>
                     <el-col :span="responsive">
@@ -54,14 +54,14 @@
                             :data="payload"
                             style="width: 100%">
                             <el-table-column
-                                prop="displayName"
-                                label="標籤">
+                                prop="description"
+                                label="特徵">
                             </el-table-column>
                             <el-table-column
-                                prop="classification.score"
+                                prop="score"
                                 label="信心指數">
                                 <template slot-scope="scope">
-                                    {{(scope.row.classification.score * 100).toFixed(2)}}
+                                    {{(scope.row.score * 100).toFixed(2)}} %
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -78,8 +78,7 @@
 
 <script>
 // import _ from 'lodash'
-import axios from 'axios'
-import base64 from 'hi-base64'
+// import axios from 'axios'
 
 export default {
     name: 'VisionApi',
@@ -104,10 +103,10 @@ export default {
     },
     computed: {
         dialogResponsive() {
-            return this.windowWidth > 620 ? '600px' : '90%'
+            return this.windowWidth > 800 ? '800px' : '90%'
         },
         responsive() {
-            return this.windowWidth > 500 ? 12 : 24
+            return this.windowWidth > 500 ? 24 : 24
         }
     },
     methods: {
@@ -115,27 +114,18 @@ export default {
             this.$router.push('/')
         },
         handleSuccess(response) {
-            let self = this
-            let nameBase64 = base64.encode(response.file.name)
+            this.imageName = `http://35.194.171.98${response.file}`
+            this.isLoading = false
+            this.resultDialogVisible = true
+            let scoreResult = []
 
-            this.imageName = null
-            this.statusInfo = '上傳完成，辨識中'
-            
-            axios.get(`http://35.194.171.98/prediction/${nameBase64}`)
-                .then(res => {
-                    let payload = res.data.payload
+            response.labels.forEach(elm => {
+                if (elm.score > 0.8) {
+                    scoreResult.push(elm)
+                }
+            });
 
-                    if (payload) {
-                        self.isLoading = false
-                        self.statusInfo = null
-                        self.payload = payload
-
-                        self.imageName = `http://35.194.171.98/uploads/${response.file.name.replace(/[/\\?%*: |"<>]/g, '_')}`
-                        self.resultDialogVisible = true
-                    } else {
-                        self.handleSuccess(response)
-                    }
-                })
+            this.payload = scoreResult
         },
         handleError() {
             alert('oops something went wrong')
@@ -146,7 +136,7 @@ export default {
         },
         handleChange() {
             let self = this
-            var fileInput    = document.querySelector('input[type=file]').files[0];
+            var fileInput = document.querySelector('input[type=file]').files[0];
             var reader  = new FileReader();
 
             reader.addEventListener("load", function () {
@@ -242,16 +232,19 @@ export default {
     width: 100%;
     height: 400px;
     overflow: auto;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 
-    img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        max-height: 100%;
-        max-width: 100%;
-        width: auto;
-        transform: translate(-50%, -50%);
-    }
+    // img {
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     max-height: 100%;
+    //     max-width: 100%;
+    //     width: auto;
+    //     transform: translate(-50%, -50%);
+    // }
 }
 @media only screen and (max-width: 768px) {
     .content-section {

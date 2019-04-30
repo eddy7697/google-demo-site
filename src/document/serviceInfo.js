@@ -47,8 +47,8 @@ export default {
                 label: 'va',
                 title: 'Cloud Vision API',
                 content: `<p style="margin-left:0cm; margin-right:0cm"><span style="font-size:12pt"><span style="font-family:Calibri,sans-serif">Cloud Vision <span style="font-family:&quot;新細明體&quot;,serif">可透過</span> API <span style="font-family:&quot;新細明體&quot;,serif">提供經過預先訓練的模型，且能使用</span> AutoML Vision <span style="font-family:&quot;新細明體&quot;,serif">建構自訂模型，可根據您的使用案例調整彈性。</span></span></span></p><p style="margin-left:0cm; margin-right:0cm"><span style="font-size:12pt"><span style="font-family:Calibri,sans-serif">Cloud Vision API <span style="font-family:&quot;新細明體&quot;,serif">讓開發人員在容易使用的</span> REST API <span style="font-family:&quot;新細明體&quot;,serif">中，透過封裝強大的機器學習模型瞭解圖片內容。它可以快速將圖片歸類至數千種類別之一</span> (<span style="font-family:&quot;新細明體&quot;,serif">例如「帆船」</span>)<span style="font-family:&quot;新細明體&quot;,serif">、偵測圖片內的個別物件和臉部，且可讀取圖片中的印刷文字。您可以透過圖片情緒分析，在圖片目錄中建構中繼資料、審核令人反感的內容，或加入新的行銷方案。</span></span></span></p><p style="margin-left:0cm; margin-right:0cm">&nbsp;</p><p style="margin-left:0cm; margin-right:0cm"><span style="font-size:12pt"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;新細明體&quot;,serif">參考連結：</span><span style="color:#0563c1"><u><a href="https://cloud.google.com/vision/" style="color:#0563c1; text-decoration:underline">https://cloud.google.com/vision/</a></u></span></span></span></p>`,
-                route: null,
-                redirectBtn: '開發中'
+                route: 'cloud-vision-api',
+                redirectBtn: '開始辨識'
             },{
                 label: 'nla',
                 title: 'Cloud Natural Language API',

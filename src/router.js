@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import VisionApi from './views/VisionApi.vue'
+import CloudVisionApi from './views/CloudVisionApi.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
             path: '/vision-api',
             name: 'VisionApi',
             component: VisionApi
+        },
+        {
+            path: '/cloud-vision-api',
+            name: 'CloudVisionApi',
+            component: CloudVisionApi
         }
       
     ]
