@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import VisionApi from './views/VisionApi.vue'
+import FreshWorks from './views/FreshWorks.vue'
 import CloudVisionApi from './views/CloudVisionApi.vue'
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
             path: '/cloud-vision-api',
             name: 'CloudVisionApi',
             component: CloudVisionApi
+        },
+        {
+            path: '/freshworks',
+            name: 'FreshWorks',
+            component: FreshWorks
         }
       
     ]

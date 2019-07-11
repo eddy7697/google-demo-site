@@ -1,5 +1,11 @@
 <template>
     <div class="home" :class="{ 'show-panel': isDetailShow }">
+        <div class="freshworks-logo">
+            <router-link to="freshworks">
+                <img style="width: 155px;" src="../assets/fresgwirks-color-1.png" alt="">
+            </router-link>
+            
+        </div>
         <div class="outer-box">
             <transition
                 name="fadeIn"
@@ -136,6 +142,12 @@ export default {
         }
     }
 }
+.freshworks-logo {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    transform: translate(-50%, -50%);
+}
 .google-logo {
     position: absolute;
     top: 50%;
@@ -156,7 +168,7 @@ export default {
 }
 .outer-box {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;    
     transform: translate(-50%, -60%);
     
